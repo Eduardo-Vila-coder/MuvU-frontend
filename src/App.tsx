@@ -1,12 +1,12 @@
-import './App.css'
+import { PageLoader } from './components/ui/PageLoader';
+import { useAuth } from './hooks/useAuth';
+import { AppRouter } from './routes/AppRouter';
 
-function App() {
+export default function App() {
+  const { isRestoring } = useAuth();
 
-  return (
-    <>
-      <h1 className="bg-red-300">Hello World!</h1>
-    </>
-  )
+  // Wait until we know if there is a session before showing any page
+  if (isRestoring) return <PageLoader />;
+
+  return <AppRouter />;
 }
-
-export default App
